@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+   height: 100vh;
+}
+
+.ql-editor{
+   font-size: 1.05rem;
+}
+
+.post-content p {
+   margin-bottom: 0.5rem;
+}
+
+.post-content h1 {
+   font-size: 1.5rem;
+   font-weight: 600;
+   font-family: sans-serif;
+   margin: 1.5rem 0;
+}
+
+.post-content h2 {
+   font-size: 1.4rem;
+   font-family: sans-serif;
+   margin: 1.5rem 0;
+}
+
+
+.post-content a{
+   color: rgb(73, 149 199);
+   text-decoration: none;
+}
+
+.post-content a:hover {
+   text-decoration: underline;
+}
+
+.dark .post-content a {
+   color: red;
+}
+
+.loader {
+   width: 22px;
+   height: 22px;
+   position: relative;
+   border-radius: 50%;
+   color: #374151b4;
+   animation: fill 1s ease-in infinite alternate;
+   top: 100px;
+   left: 50%;
+   transform: translate(-50%);
+}
+ .loader::before , .loader::after {
+   content: '';
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   border-radius: 50%;
+   left: 48px;
+   top: 0;
+   animation: fill 1.2s ease-in infinite alternate;
+ }
+ 
+ .loader::after {
+   left: auto;
+   right: 48px;
+   animation-duration: 1s;
+ }
+ 
+ @keyframes fill {
+  0% {  box-shadow: 0 0 0 0.5px inset }
+  100%{ box-shadow: 0 0 0 7px inset }
+ }
+   
