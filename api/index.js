@@ -7,11 +7,20 @@ import authRoutes from './routes/auth.route.js'
 import postRoutes from './routes/post.route.js'
 import commentRoutes from './routes/comment.route.js'
 import cookieParser from "cookie-parser";
+import path from 'path'
+
+
+const __dirname = path.resolve()
 
 const app = express()
 
-app.use(express.json({limit: '50mb'}))
-app.use(express.urlencoded({limit: '50mb'}))
+app.use(express.static(path.join(__dirname, '/client/dist')))
+
+app.get('*', (req, res) => {
+   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
+})
+
+app.use(express.json())
 app.use(cookieParser())
 
 mongoose.connect(process.env.MONGO)
