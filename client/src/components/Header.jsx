@@ -55,26 +55,23 @@ export default function Header() {
 
    return (
     <Navbar className='border-b-2'>
-      <Link to={'/'} className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
+      <Link to={'/'} className="self-center whitespace-nowrap text-xs sm:text-xl font-semibold dark:text-white">
          <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">Ibrokhim's</span>
          Blog
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='w-[150px] sm:w-[210px]'>
          <TextInput 
             type={'text'} 
             placeholder="Search..." 
             rightIcon={AiOutlineSearch} 
-            className="hidden lg:inline"
+            className="inline"
             value={searchTerm}   
             onChange={e => setSearchTerm(e.target.value)}
          />
       </form>
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
-         <AiOutlineSearch/>
-      </Button>
       <div className="flex gap-2 md:order-2">
          <Button 
-            className='w-12 h-10 hidden sm:inline' 
+            className='w-12 h-10 hidden md:inline' 
             color={'gray'} pill
             onClick={() => dispatch(toggleTheme())}>
             {theme === 'light' ? <FaSun/> : <FaMoon/>}
@@ -86,6 +83,7 @@ export default function Header() {
                label={<Avatar alt='user'
                img={currentUser?.profilePicture}
                rounded   
+               className='hidden sm:block'
             />}>
                <Dropdown.Header>
                   <span className="block text-sm">@{currentUser.username}</span>
@@ -114,6 +112,32 @@ export default function Header() {
             <Navbar.Link active={path === '/projects'} as={'div'}>
                <Link to={'/projects'}>Projects</Link>
             </Navbar.Link>
+            <div className="pt-5 mt-2 border-t-2 sm:hidden">
+               <div className="flex justify-between px-2 mb-2">
+                  <div className="flex items-center gap-3">
+                     <div className="w-10 h-10 rounded-full overflow-hidden">
+                        <img src={currentUser?.profilePicture} alt="" />
+                     </div>
+                     <div className="text-xs">
+                        <span className="block ">@{currentUser?.username}</span>
+                        <span className="block font-medium truncate">{currentUser?.email}</span>
+                     </div>
+                  </div>
+
+                  <Button 
+                     className='w-12 h-10 inline' 
+                     color={'gray'} pill
+                     onClick={() => dispatch(toggleTheme())}>
+                     {theme === 'light' ? <FaSun/> : <FaMoon/>}
+                  </Button>
+               </div>
+               <Navbar.Link active={path === '/dashboard'} as={'div'}>
+                  <Link to={"/dashboard?tab=profile"}>Profile</Link>
+               </Navbar.Link>
+               <Navbar.Link as={'div'}>
+                  <button type='button' onClick={handleSignout} >Sign out</button>
+               </Navbar.Link>
+            </div>
          </Navbar.Collapse>
     </Navbar>
   )
