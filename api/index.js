@@ -8,6 +8,7 @@ import postRoutes from './routes/post.route.js'
 import commentRoutes from './routes/comment.route.js'
 import cookieParser from "cookie-parser";
 import path from 'path'
+import cors from 'cors'
 
 
 const __dirname = path.resolve()
@@ -22,6 +23,7 @@ app.get('*', (req, res) => {
 
 app.use(express.json())
 app.use(cookieParser())
+
 
 mongoose.connect(process.env.MONGO)
    .then(() => {
