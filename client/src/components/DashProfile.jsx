@@ -19,6 +19,7 @@ export default function DashProfile() {
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploading, setImageFileUploading] = useState(false)
   const [formData, setFormData] = useState({});
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
@@ -51,7 +52,7 @@ export default function DashProfile() {
     //     }
     //   }
     // }
-
+    setImageFileUploading(true)
     setImageFileUploadError(null)
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
@@ -71,10 +72,13 @@ export default function DashProfile() {
         setImageFileUploadProgress(null)
         setImageFile(null)
         setImageFileUrl(null)
+        setImageFileUploading(false)
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downoadURL) => {
           setImageFileUrl(downoadURL);
+          setFormData({...formData, profilePicture: downoadURL})
+          setImageFileUploading(false)
         });
       }
     );
@@ -92,6 +96,10 @@ export default function DashProfile() {
     if (Object.keys(formData).length === 0) {
       setUpdateUserError("No changes made");
       return;
+    }
+    if(imageFileUploading) {
+      setUpdateUserError('Please wait for image to upload')
+      return
     }
 
     try {

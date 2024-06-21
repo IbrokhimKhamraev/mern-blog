@@ -52,7 +52,7 @@ export default function CreatePost() {
          }
          setImageUploadError(null)
          const storage = getStorage(app)
-         const fileName = new Date().getTime() + file.name
+         const fileName = new Date().getTime() + '-' + file.name
          const storageRef = ref(storage, fileName)
          const uploadTask = uploadBytesResumable(storageRef, file)
          uploadTask.on(
@@ -112,6 +112,7 @@ export default function CreatePost() {
          {formData.image && <img src={formData.image} alt="upload" className='w-full h-72 object-cover'/> }
          <ReactQuill onChange={(e) => setFormData({...formData, content: e})} placeholder='Write something...' className='h-72 mb-12' required/>
          <Button type='submit' gradientDuoTone={"purpleToPink"} >Publish</Button>
+         {publishError && <Alert className='mt-5' color={'failure'}>{publishError}</Alert> }
       </form>
     </div>
   )

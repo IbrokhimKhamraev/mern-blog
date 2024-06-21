@@ -6,7 +6,6 @@ export const verifyToken = async (req, res, next) => {
   if (!accesstoken) {
     if (renewToken(req, res)) {
       if(req.user) {
-        console.log(req.usre);
         const accessToken = jwt.sign(
           { id: req?.user?.id, isAdmin: req?.user?.isAdmin },
           process.env.JWT_ACCESS_SECRET,
@@ -38,7 +37,6 @@ const renewToken = (req, res) => {
   if (!refreshtoken) {
     res.json({message: "Unauthorized!"})
   } else {
-    console.log(refreshtoken);
     jwt.verify(refreshtoken, process.env.JWT_REFRESH_SECRET, (err, user) => {
       if (err) {
         res.json({message: "Unauthorized!"})
