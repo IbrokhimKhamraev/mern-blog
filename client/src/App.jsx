@@ -6,7 +6,6 @@ import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
 import Header from './components/Header'
-import Test from './pages/Test'
 import Footer from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
 import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute'
@@ -46,7 +45,6 @@ export default function App() {
       <ScrollToTop/>
       <Header/>
       <Routes>
-        <Route path='/test' element={<Test/>}/>
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/sign-in" element={<SignIn/>}/>
