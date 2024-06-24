@@ -1,4 +1,4 @@
-import {Button, Select, TextInput} from 'flowbite-react'
+import {Button, Select, Spinner, TextInput} from 'flowbite-react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
@@ -138,7 +138,9 @@ export default function Search() {
             }
             {
                loading && (
-                  <p className="text-xl text-gray-500">Loading...</p>
+                     <div className="flex justify-center items-start mt-5 min-h-screen w-full">
+                        <Spinner size={'xl'}/>
+                     </div>
                )
             }
             {
